@@ -20,7 +20,7 @@ $ source env/bin/activate
 Then install the dependencies:
 
 ```sh
-(env)$ pip install -r requirements.txt(env)$ pip install -r requirements.txt
+(env)$ pip install -r requirements.txt
 ```
 
 Once pip has finished downloading the dependencies:
