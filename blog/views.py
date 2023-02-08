@@ -3,6 +3,7 @@ from django.views import View
 from .models import Product,Category,Message,ReservationInfo
 from .forms import UserMessageForm,UserReservationForm
 from django.contrib import messages
+from thecafe.utils import reservation_submit_sms
 
 class Home(View):
     def get(self, request):
@@ -44,6 +45,7 @@ class Reservation(View):
 		form = self.form_class(request.POST)
 		if form.is_valid():
 				cd = form.cleaned_data
+				reservation_submit_sms(cd['phone'],cd['name'],cd['r_time'],cd['r_date'],cd['person'])                
 				data = ReservationInfo.objects.create(name=cd['name'], phone=cd['phone'], r_date=cd['r_date'], r_time=cd['r_time'], person=cd['person'])
 				data.save()
 				messages.success(request, 'your reservation submitted successfully', 'success')
